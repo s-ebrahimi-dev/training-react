@@ -38,6 +38,75 @@
 // }
 
 
+// *================================Example-1====================================
+
+
+// function VehicleCard({
+//   model = "Unknown vehicle",
+//   year = 2026,
+//   isAvailable = false,
+// }) {
+//   return (
+//     <article>
+//       <h2>{model}</h2>
+//       <p>{year}</p>
+//       <p>{isAvailable ? "Available" : "Unavailable"}</p>
+//     </article>
+//   );
+// }
+
+function VehicleCard({ model, year }) {
+  return (
+    <article>
+      <h2>{model}</h2>
+      <p>{year}</p>
+    </article>
+  );
+}
+
+function VehicleList({ vehicles }) {
+  return (
+    <div>
+      {vehicles.map((vehicle) => (
+        <VehicleCard
+          key={vehicle.id}
+          model={vehicle.model}
+          year={vehicle.year}
+        />
+      ))}
+    </div>
+  );
+}
+
+function App() {
+  const vehicles = [
+    { id: 1, model: "BMW X5", year: 2022 },
+    { id: 2, model: "Toyota Camry", year: 2023 },
+    { id: 3, model: "Mercedes C200", year: 2021 },
+  ];
+
+  return (
+    <VehicleList vehicles={vehicles} />
+  );
+}
+export default App
+// *===========================Example-2========================================
+// function Button({ onPress }) {
+//   return (
+//     <button onClick={onPress}>
+//       Click me
+//     </button>
+//   );
+// }
+
+// function App() {
+//   function handleClick() {
+//     console.log("Button clicked!");
+//   }
+
+//   return <Button onPress={handleClick} />;
+// }
+// export default App
 //* =======================Naming Event Handler Props==================================
 // function Button({ onSmash, children }) {
 //   return (
@@ -174,7 +243,8 @@
 //     </div>
 //   );
 // }
-//* =====================Example-2================================
+//* ==============Event Delegation=======Example-2================================
+
 // export default function UserList() {
 
 //   const users = [
@@ -231,49 +301,50 @@
 //     </div>
 //   );
 // }
-// ======================Example-3 use-state================================
-import { useState } from "react";
 
-function UserList({ users, onDelete }) {
-  return (
-    <div>
-      {users.map(user => (
-        <div key={user.id}>
-          <span>{user.name}</span>
+//* ======================Example-3 use-state================================
+// import { useState } from "react";
 
-          <button onClick={() => onDelete(user.id)}>
-            Delete
-          </button>
-        </div>
-      ))}
-    </div>
-  );
-}
+// function UserList({ users, onDelete }) {
+//   return (
+//     <div>
+//       {users.map(user => (
+//         <div key={user.id}>
+//           <span>{user.name}</span>
 
-export default function App() {
+//           <button onClick={() => onDelete(user.id)}>
+//             Delete
+//           </button>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 
-  // آرایه کاربران اینجا قرار می‌گیرد
-  const [users, setUsers] = useState([
-    { id: 1, name: "Ali" },
-    { id: 2, name: "Reza" },
-    { id: 3, name: "Sara" }
-  ]);
+// export default function App() {
 
-  // تابع حذف کاربر
-  function handleDelete(userId) {
-    setUsers(prevUsers =>
-      prevUsers.filter(user => user.id !== userId)
-    );
-  }
+//   // آرایه کاربران اینجا قرار می‌گیرد
+//   const [users, setUsers] = useState([
+//     { id: 1, name: "Ali" },
+//     { id: 2, name: "Reza" },
+//     { id: 3, name: "Sara" }
+//   ]);
 
-  return (
-    <div>
-      <h1>User Management</h1>
+//   // تابع حذف کاربر
+//   function handleDelete(userId) {
+//     setUsers(prevUsers =>
+//       prevUsers.filter(user => user.id !== userId)
+//     );
+//   }
 
-      <UserList
-        users={users}
-        onDelete={handleDelete}
-      />
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <h1>User Management</h1>
+
+//       <UserList
+//         users={users}
+//         onDelete={handleDelete}
+//       />
+//     </div>
+//   );
+// }
