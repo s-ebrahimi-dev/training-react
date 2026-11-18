@@ -37,9 +37,7 @@
 //   );
 // }
 
-
 // *================================Example-1====================================
-
 
 // function VehicleCard({
 //   model = "Unknown vehicle",
@@ -55,41 +53,41 @@
 //   );
 // }
 
-function VehicleCard({ model, year }) {
-  return (
-    <article>
-      <h2>{model}</h2>
-      <p>{year}</p>
-    </article>
-  );
-}
+// function VehicleCard({ model, year }) {
+//   return (
+//     <article>
+//       <h2>{model}</h2>
+//       <p>{year}</p>
+//     </article>
+//   );
+// }
 
-function VehicleList({ vehicles }) {
-  return (
-    <div>
-      {vehicles.map((vehicle) => (
-        <VehicleCard
-          key={vehicle.id}
-          model={vehicle.model}
-          year={vehicle.year}
-        />
-      ))}
-    </div>
-  );
-}
+// function VehicleList({ vehicles }) {
+//   return (
+//     <div>
+//       {vehicles.map((vehicle) => (
+//         <VehicleCard
+//           key={vehicle.id}
+//           model={vehicle.model}
+//           year={vehicle.year}
+//         />
+//       ))}
+//     </div>
+//   );
+// }
 
-function App() {
-  const vehicles = [
-    { id: 1, model: "BMW X5", year: 2022 },
-    { id: 2, model: "Toyota Camry", year: 2023 },
-    { id: 3, model: "Mercedes C200", year: 2021 },
-  ];
+// function App() {
+//   const vehicles = [
+//     { id: 1, model: "BMW X5", year: 2022 },
+//     { id: 2, model: "Toyota Camry", year: 2023 },
+//     { id: 3, model: "Mercedes C200", year: 2021 },
+//   ];
 
-  return (
-    <VehicleList vehicles={vehicles} />
-  );
-}
-export default App
+//   return (
+//     <VehicleList vehicles={vehicles} />
+//   );
+// }
+// export default App
 // *===========================Example-2========================================
 // function Button({ onPress }) {
 //   return (
@@ -159,7 +157,6 @@ export default App
 //     </button>
 //   );
 // }
-
 
 //* =======================Event Propagation ===============================
 // export default function Toolbar() {
@@ -348,3 +345,114 @@ export default App
 //     </div>
 //   );
 // }
+
+// * ===================Weather-App=======================
+import { useState } from "react";
+import "./App.css";
+import React from "react";
+
+function App() {
+  const cities = [
+    { name: "تبریز", temperature: "25", desc: "تقریبا ابری - احتمال بارش" },
+    {
+      name: "تهران",
+      temperature: "18",
+      desc: "تقریبا آفتابی - احتمال وزش باد",
+    },
+    { name: "شیروان", temperature: "11", desc: "نیمه آفتابی - رگبار پراکنده" },
+    {
+      name: "لاس وگاس",
+      temperature: "19",
+      desc: "کاملا صاف - احتمال برف و کولاک",
+    },
+  ];
+
+  return (
+    <>
+      <article id="weather-card">
+        <header className="" id="weather-card.header">
+          <div id="city-name">ایران، تبریز</div>
+          <div className="temp-parent">
+            <span id="symbol"> C </span>
+            <span id="temperature"> 25 </span>
+          </div>
+          <div id="desc">تقریبا ابری - احتمال بارش</div>
+          <div id="search-field">
+            <input
+              type="text"
+              placeholder="نام شهر خود را جستجو کنید ..."
+              id="search-input"
+              className="w-full h-10 bg-black"
+            />
+            <button id="search-btn">جستجو</button>
+          </div>
+        </header>
+        <main>
+          <div id="in-hours">
+            <article className="hourly-card">
+              <p className="hour">16:00</p>
+              <img src="./public/images/sunny.png" />
+              <p className="hour-temp">27C</p>
+            </article>
+            <article className="hourly-card">
+              <p className="hour">16:00</p>
+              <img src="./public/images/rainy.png" />
+              <p className="hour-temp">27C</p>
+            </article>
+            <article className="hourly-card">
+              <p className="hour">16:00</p>
+              <img src="./public/images/sunny.png" />
+              <p className="hour-temp">27C</p>
+            </article>
+            <article className="hourly-card">
+              <p className="hour">16:00</p>
+              <img src="./public/images/sunny.png" />
+              <p className="hour-temp">27C</p>
+            </article>
+          </div>
+        </main>
+        <footer id="daily-section">
+          <article className="daily-card">
+            <p className="daily-date">07/12</p>
+            <p className="dayly-day">TUE</p>
+            <img src="./public/images/rainy.png" alt="Weather" />
+            <p className="daily-temp">32C</p>
+          </article>
+          <article className="daily-card">
+            <p className="daily-date">07/12</p>
+            <p className="dayly-day">TUE</p>
+            <img src="./public/images/rainy.png" alt="Weather" />
+            <p className="daily-temp">32C</p>
+          </article>
+          <article className="daily-card">
+            <p className="daily-date">07/12</p>
+            <p className="dayly-day">TUE</p>
+            <img src="./public/images/rainy.png" alt="Weather" />
+            <p className="daily-temp">32C</p>
+          </article>
+          <article className="daily-card">
+            <p className="daily-date">07/12</p>
+            <p className="dayly-day">TUE</p>
+            <img src="./public/images/rainy.png" alt="Weather" />
+            <p className="daily-temp">32C</p>
+          </article>
+        </footer>
+      </article>
+      <div id="modal-screen" className="hide">
+        <div id="modal-content">
+          <div id="danger-icon">
+            <i className="fa-solid fa-exclamation"></i>
+          </div>
+          <p id="modal-title">یافت نشد !</p>
+          <p id="modal-caption">متاسفانه شهر مدنظر شما پیدا نشد !</p>
+
+          <div id="modal-footer">
+            <button id="close-btn">تایید</button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default App;
