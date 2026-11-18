@@ -366,6 +366,7 @@ function App() {
       desc: "کاملا صاف - احتمال برف و کولاک",
     },
   ];
+  const [city, setCity] = useState("")
 
   return (
     <>
@@ -379,10 +380,14 @@ function App() {
           <div id="desc">تقریبا ابری - احتمال بارش</div>
           <div id="search-field">
             <input
+              value={city}
               type="text"
               placeholder="نام شهر خود را جستجو کنید ..."
               id="search-input"
               className="w-full h-10 bg-black"
+              onChange={(event) => {
+                setCity(event.target.value)
+              }}
             />
             <button id="search-btn">جستجو</button>
           </div>
