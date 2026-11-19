@@ -349,9 +349,14 @@
 // * ===================Weather-App=======================
 import { useState } from "react";
 import "./App.css";
+import Modal from "./components/Modal/Modal";
 import React from "react";
 
 function App() {
+  const [city, setCity] = useState("");
+  const [cityTempData, setCityTempData] = useState({});
+  const [noCity, setNoCity] = useState(false);
+
   const cities = [
     { name: "تبریز", temperature: "25", desc: "تقریبا ابری - احتمال بارش" },
     {
@@ -366,30 +371,43 @@ function App() {
       desc: "کاملا صاف - احتمال برف و کولاک",
     },
   ];
-  const [city, setCity] = useState("")
+  const showTempHandler = () => {
+    const cityTemp = cities.find((item) => item.name === city);
+    if (cityTemp) {
+      setCityTempData(cityTemp);
+      setNoCity(false);
+    } else {
+      setCityTempData(null);
+      setNoCity(true);
+    }
+  };
 
   return (
     <>
       <article id="weather-card">
         <header className="" id="weather-card.header">
-          <div id="city-name">ایران، تبریز</div>
+          <div id="city-name">ایران، {cityTempData?.name}</div>
           <div className="temp-parent">
             <span id="symbol"> C </span>
-            <span id="temperature"> 25 </span>
+            <span id="temperature"> {cityTempData?.temperature} </span>
           </div>
-          <div id="desc">تقریبا ابری - احتمال بارش</div>
+          <div id="desc">{cityTempData?.desc}</div>
           <div id="search-field">
             <input
               value={city}
               type="text"
               placeholder="نام شهر خود را جستجو کنید ..."
               id="search-input"
-              className="w-full h-10 bg-black"
-              onChange={(event) => {
-                setCity(event.target.value)
-              }}
+              className="w-full h-10 bg-white"
+              onChange={(event) => setCity(event.target.value)}
             />
-            <button id="search-btn">جستجو</button>
+            <button
+              id="search-btn"
+              className="pointer"
+              onClick={showTempHandler}
+            >
+              جستجو
+            </button>
           </div>
         </header>
         <main>
@@ -443,19 +461,14 @@ function App() {
           </article>
         </footer>
       </article>
-      <div id="modal-screen" className="hide">
-        <div id="modal-content">
-          <div id="danger-icon">
-            <i className="fa-solid fa-exclamation"></i>
-          </div>
-          <p id="modal-title">یافت نشد !</p>
-          <p id="modal-caption">متاسفانه شهر مدنظر شما پیدا نشد !</p>
-
-          <div id="modal-footer">
-            <button id="close-btn">تایید</button>
-          </div>
-        </div>
-      </div>
+      {noCity && (
+        <Modal
+          onClose={() => {
+            setNoCity(false);
+            setCity("");
+          }}
+        />
+      )}
     </>
   );
 }
